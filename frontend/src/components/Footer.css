@@ -1,0 +1,20 @@
+a {
+    color: rgb(0, 0, 0);
+    text-decoration: none; /* no underline */
+  }
+
+.footer{
+    position:fixed;
+    bottom: 0;
+    width:100%;
+display: flex;
+background-color: rgba(166, 166, 170, 0.664);
+justify-content: space-around;
+margin-bottom: 0;
+}
+
+.footerItem{
+list-style-type: none;
+font-size: 14px;
+
+}
