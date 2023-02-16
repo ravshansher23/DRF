@@ -7,5 +7,6 @@ class CustomUser(AbstractBaseUser):
     last_name = models.CharField("last name", max_length=150, blank=True)
     email = models.CharField("email address", max_length=256, unique=True)
     
-    
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
     
