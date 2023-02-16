@@ -1,0 +1,18 @@
+
+a {
+        color: rgb(0, 0, 0);
+        text-decoration: none; /* no underline */
+      }
+
+.navMenu{
+    display: flex;
+    background-color: rgba(166, 166, 170, 0.664);
+    justify-content: space-around;
+    margin-top: 0;
+}
+
+.menuItem{
+    list-style-type: none;
+    font-size: 20px;
+    
+}
