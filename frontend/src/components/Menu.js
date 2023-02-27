@@ -1,24 +1,23 @@
 import React from "react";
 import './Menu.css'
+import {HashRouter, Route, BrowserRouter, Link} from "react-router-dom"
 
-
-const MenuItem = ({ menu }) => {
+function NavbarItem({name, href}) {
     return (
-            <li className="menuItem">
-            <a href="#">{menu.name}</a>
+        <li className="menuItem">
+            <Link className="nav-link" to={href}>{name}</Link>
             </li>
     )
 }
-const MenuList = ({menus}) => {
-    return(
-        <nav>
-            <ul className="navMenu">
-            {menus.map((menu) => <MenuItem menu={menu}/>)}
-            </ul>
-        </nav>
-        
-            
 
+
+export default function Navbar({navbarItems}) {
+    return (
+        <nav>
+                <ul className="navMenu">
+                                {navbarItems.map((item) => <NavbarItem name={item.name} href={item.href}/>)}
+                </ul>
+               
+        </nav>
     )
 }
-export default MenuList
