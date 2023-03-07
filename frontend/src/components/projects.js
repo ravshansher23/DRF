@@ -1,23 +1,23 @@
 import React from "react";
 import './Users.css'
-const ProjectItem = ({ project }) => {
+const ProjectItem = ({ item }) => {
     return (
         <tr>
             <td>
-                {project.name}
+                {item.name}
             </td>
             <td>
-                {project.link}
+                {item.link}
             </td>
             <td>
-                {project.users}
+                {item.users}
             </td>
         </tr>
     )
 
 }
 
-const ProjectList = ({projects}) => {
+const ProjectList = ({ items }) => {
     return(
         <table className="table">
             <thead>
@@ -32,7 +32,7 @@ const ProjectList = ({projects}) => {
             </th>
             </thead>
             <tbody>
-            {projects.map((project) => <ProjectItem project={project}/>)}
+            {items.map((item) => <ProjectItem item={item}/>)}
             </tbody>
         </table>
     )

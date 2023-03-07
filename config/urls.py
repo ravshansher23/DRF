@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 from users.views import CustomUserModelViewSet
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from todo.views import TODOModelViewSet, ProjectModelViewSet
+
 
 from todo.views import TODOCustomViewSet, ProjectCustomViewSet
 
