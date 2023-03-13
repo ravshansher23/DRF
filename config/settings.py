@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'django_filters',
     'drf_yasg',
+    "graphene_django",
 
 
 ]
@@ -166,3 +167,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:3000",
 ]
+
+GRAPHENE = {
+"SCHEMA": "config.schema.schema"
+}
