@@ -10,7 +10,7 @@ from .filters import TODOFilters, ProjectFilters
 class TODOLimitOffsetPagination(PageNumberPagination):
     page_size = 20
 class TODOCustomViewSet(ModelViewSet):
-    queryset = TODO.objects.all()
+    queryset = TODO.objects.order_by("pk").all()
     serializer_class = TODOSerializer
     pagination_class = TODOLimitOffsetPagination
     filterset_class = TODOFilters
@@ -28,7 +28,7 @@ class TODOCustomViewSet(ModelViewSet):
 class ProjectLimitOffsetPagination(PageNumberPagination):
     page_size = 10
 class ProjectCustomViewSet(ModelViewSet):
-    queryset = Project.objects.all()
+    queryset = Project.objects.order_by("pk").all()
        
     pagination_class = ProjectLimitOffsetPagination
     serializer_class = ProjectSerializer
