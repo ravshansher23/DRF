@@ -11,6 +11,11 @@ import FooterList from './components/Footer.js';
 import { HashRouter, Route, BrowserRouter, Link, Switch, Redirect } from "react-router-dom";
 import NotFound404 from './components/NotFound404.js';
 import LoginForm from "./components/Auth.js";
+import ProjectForm from "./components/projectForm";
+import TodoForm from "./components/todoForm";
+
+const DOMAIN = 'http://127.0.0.1:8000/api/'
+const get_url = (url) => `${DOMAIN}${url}`
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -86,10 +91,52 @@ class App extends React.Component {
       )
   }
 
+  deleteProject(id) {
+    const headers = this.get_headers()
+    axios.delete(`http://127.0.0.1:8000/api/projects/${id}`, {headers, headers})
+    .then(response => {
+    this.setState({projects: this.state.projects.filter((item)=>item.id !==
+    id)})
+    }).catch(error => console.log(error))
+  }
+  createProject(name, user) {
+    const data = {name: name, user: user}
+    const headers = this.get_headers()
+    axios.post(`http://127.0.0.1:8000/api/projects/`,data, {headers, headers})
+    .then(response => {
+      let new_project = response.data
+      const user = this.state.filter((item) => item.id === new_project.user[0])
+      new_project = user
+      this.setState({projects: [...this.state.projects, new_project]})
+    }).catch(error => console.log(error))
+  }
+
+  
+  createTodo(author, project, body) {
+    const data = {author: author, project: project, body: body}
+    const headers = this.get_headers()
+    axios.post(`http://127.0.0.1:8000/api/todos/`,data, {headers, headers})
+    .then(response => {
+      let new_todo = response.data
+      const author = this.state.filter((item) => item.id === new_todo.author[0])
+      new_todo = author
+      this.setState({todos: [...this.state.todos, new_todo]})
+    }).catch(error => console.log(error))
+  }
+
+  deleteTodo(id) {
+    const headers = this.get_headers()
+    axios.delete(`http://127.0.0.1:8000/api/todos/${id}`, {headers, headers})
+    .then(response => {
+    this.setState({todos: this.state.todos.filter((item)=>item.id !==
+    id)})
+    }).catch(error => console.log(error))
+  }
+
   componentDidMount() {
 
     const username = localStorage.getItem('login')
-    if ((username != "") & (username != null)) {
+    if ((username !== "") & (username !== null)) {
       this.setState({ 'auth': { username: username, is_login: true } }, () => this.load_data())
     }
   }
@@ -104,10 +151,12 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/' component={() => <UsersList users={this.state.users} />}>
             </Route>
-            <Route exact path='/projects' component={() => <ProjectList items={this.state.projects} />}>
+            <Route exact path='/projects' component={() => <ProjectList items={this.state.projects} delete={(id)=>this.deleteProject(id)} />}>
             </Route>
-            <Route exact path='/todos' component={() => <TodoList items={this.state.todos} />}>
+            <Route exact path='/todos' component={() => <TodoList items={this.state.todos} delete={(id)=>this.deleteTodo(id)} />}>
             </Route>
+            <Route exact path='/projects/create' component={() => <ProjectForm createProject={(name,user)=> this.createProject(name,user)}/>}/>
+            <Route exact path='/todos/create' component={() => <TodoForm createTodo={(author, project, body)=> this.createTodo(author, project, body)}/>}/>
             <Route exact path='/login'>
               <LoginForm login={(username, password) => this.login(username, password)} />
             </Route>
