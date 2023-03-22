@@ -21,12 +21,12 @@ export default function Navbar({navbarItems, auth, logout}) {
     }
     return (
         
-        <nav>
+        <div>
                 <ul className="navMenu">
                     {navbarItems.map((item) => <NavbarItem name={item.name} href={item.href}/>)}
                 </ul>
                 {login_button}
-        </nav>
+        </div>
     )
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import './Users.css'
-const TodoItem = ({ item }) => {
+const TodoItem = ({ item, deleteTodo }) => {
     return (
         <tr>
             <td>
@@ -21,12 +21,13 @@ const TodoItem = ({ item }) => {
             <td>
                 {item.is_active}
             </td>
+            <td><button onClick={() => deleteTodo(item.id)} type='button'>Delete</button></td>
         </tr>
     )
 
 }
 
-const TodoList = ({ items }) => {
+const TodoList = ({ items, deleteTodo }) => {
     return (
         <table className="table">
             <thead>
@@ -48,9 +49,10 @@ const TodoList = ({ items }) => {
                 <th>
                     Is active
                 </th>
+                <th></th>
             </thead>
             <tbody>
-                {items.map((item) => <TodoItem item={item} />)}
+                {items.map((item) => <TodoItem item={item} deleteTodo={deleteTodo} />)}
             </tbody>
         </table>
     )
