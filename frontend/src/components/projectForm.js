@@ -9,7 +9,7 @@ class ProjectForm extends React.Component {
 
 
     handleChange(event){
-        this.state(
+        this.setState(
             {
                 [event.target.name]: event.target.value
             }

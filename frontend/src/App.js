@@ -105,7 +105,7 @@ class App extends React.Component {
     axios.post(`http://127.0.0.1:8000/api/projects/`,data, {headers, headers})
     .then(response => {
       let new_project = response.data
-      const user = this.state.filter((item) => item.id === new_project.user[0])
+      const user = this.state.projects.filter((item) => item.id === new_project.user[0])
       new_project = user
       this.setState({projects: [...this.state.projects, new_project]})
     }).catch(error => console.log(error))
@@ -118,7 +118,7 @@ class App extends React.Component {
     axios.post(`http://127.0.0.1:8000/api/todos/`,data, {headers, headers})
     .then(response => {
       let new_todo = response.data
-      const author = this.state.filter((item) => item.id === new_todo.author[0])
+      const author = this.state.todos.filter((item) => item.id === new_todo.author[0])
       new_todo = author
       this.setState({todos: [...this.state.todos, new_todo]})
     }).catch(error => console.log(error))
